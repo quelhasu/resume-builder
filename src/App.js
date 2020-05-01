@@ -8,7 +8,7 @@ import './assets/styles/app.css';
 function App() {
   return (
     <div className="App">
-      <div className="h-screen grid grid-cols-5 items-center">
+      <div className="h-screen grid grid-cols-6 items-center">
         <Sidebar />
         <Preview />
       </div>

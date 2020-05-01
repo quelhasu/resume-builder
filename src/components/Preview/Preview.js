@@ -1,12 +1,13 @@
 import React, { useState, useContext } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { sortObject } from '../../utils/index';
 
 const Preview = () => {
 
   const { info, social } = useSelector(state => ({
     info: state.profile.info,
-    social: state.profile.social
+    social: sortObject(state.profile.social, {phone: 1, email: 2, github: 3, linkedin: 4 })
   }))
 
   const LiSocial = styled.li`
@@ -35,12 +36,18 @@ const Preview = () => {
     }
 
     &:after{
-      
+      content:'';
+      display:inline-block;
+      width:100%; height:100%;
+      margin-right:-100%;
+      border-bottom:1px solid #717171;
+      margin-bottom: 0.45rem;
+      margin-left: 0.5rem;
     }
   
   `
   return (
-    <div className="h-screen col-span-3 p-5">
+    <div className="h-screen col-span-4 p-5">
       <header className="mb-3">
         {info.name ?
           (<p className="text-4xl">
@@ -60,7 +67,7 @@ const Preview = () => {
       </header>
       
       <body className="text-left text-xl">
-        <Title className="tracking-widest"><span>EXP</span>ERIENCES</Title>
+        <Title className="tracking-widest container overflow-hidden"><span>EXP</span>ERIENCES</Title>
       </body>
     </div>
   )
