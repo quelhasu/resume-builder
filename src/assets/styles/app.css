@@ -11819,6 +11819,10 @@ video {
   transition-property: transform;
 }
 
+.transition-maxHeight {
+  transition-property: max-height;
+}
+
 .ease-linear {
   transition-timing-function: linear;
 }
@@ -23151,6 +23155,10 @@ video {
     transition-property: transform;
   }
 
+  .sm\:transition-maxHeight {
+    transition-property: max-height;
+  }
+
   .sm\:ease-linear {
     transition-timing-function: linear;
   }
@@ -34440,6 +34448,10 @@ video {
 
   .md\:transition-transform {
     transition-property: transform;
+  }
+
+  .md\:transition-maxHeight {
+    transition-property: max-height;
   }
 
   .md\:ease-linear {
@@ -45733,6 +45745,10 @@ video {
     transition-property: transform;
   }
 
+  .lg\:transition-maxHeight {
+    transition-property: max-height;
+  }
+
   .lg\:ease-linear {
     transition-timing-function: linear;
   }
@@ -57022,6 +57038,10 @@ video {
 
   .xl\:transition-transform {
     transition-property: transform;
+  }
+
+  .xl\:transition-maxHeight {
+    transition-property: max-height;
   }
 
   .xl\:ease-linear {

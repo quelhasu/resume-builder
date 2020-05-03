@@ -11,26 +11,18 @@ const Preview = () => {
   }))
 
   const LiSocial = styled.li`
-    // text-align: center;
-    // border-left: 1px solid #ccc;
-    // background-color: #fff;
     flex-basis: auto;
     min-width: 100px;        
-
-    &:before {
-      padding-right: 1.25rem;
-      content: " | ";
-      color:#e2e8f0;
-    }
-
-    &:first-child{
-      &:before {
-        content: " "
-      }
-    }
   `;
 
-  const Title = styled.div`
+
+  const Title = ({ className, title })=> (
+    <div className={`${className} text-2xl tracking-widest container overflow-hidden font-bold uppercase`}>
+      <span>{title.substring(0,3)}</span>{title.substring(3)}
+    </div>
+  );
+
+  const StyledTitle = styled(Title)`
     &>span{
       color: #0281CB;
     }
@@ -44,13 +36,13 @@ const Preview = () => {
       margin-bottom: 0.45rem;
       margin-left: 0.5rem;
     }
-  
-  `
+  `;
+
   return (
     <div className="h-screen col-span-4 p-5">
       <header className="mb-3">
         {info.name ?
-          (<p className="text-4xl">
+          (<p className="text-5xl">
             <span className="font-thin text-gray-600">{info.name.split(' ')[0]}</span>
             <span className="font-bold uppercase">{" " + info.name.split(' ')[1]}</span>
           </p>) : ''
@@ -58,7 +50,7 @@ const Preview = () => {
         <p className="italic text-gray-400 mb-1">{info.address}</p>
 
         <div className="">
-          <ul className="inline-flex flex-wrap">
+          <ul className="inline-flex flex-wrap divide-x divide-gray-400">
             {Object.entries(social).map(([key, value]) => (
               <LiSocial className="flex-1 px-4">{value}</LiSocial>
             ))}
@@ -66,10 +58,11 @@ const Preview = () => {
         </div>
       </header>
       
-      <body className="text-left text-xl">
-        <Title className="tracking-widest container overflow-hidden"><span>EXP</span>ERIENCES</Title>
+      <body className="text-left">
+        <StyledTitle title="experiences"/>
       </body>
-    </div>
+
+     </div>
   )
 }
 
