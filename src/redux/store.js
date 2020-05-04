@@ -3,9 +3,11 @@ import {createStore, combineReducers, compose, applyMiddleware} from 'redux'
 import thunk from 'redux-thunk'
 
 import profile from '../redux/profile'
+import experience from '../redux/experience'
 
 const rootReducer = combineReducers({
-  profile
+  profile,
+  experience
 })
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
