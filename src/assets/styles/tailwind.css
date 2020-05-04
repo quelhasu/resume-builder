@@ -5,6 +5,10 @@
 
 @tailwind utilities;
 
+.colorized{
+  color: #0281CB;
+}
+
 .App {
   text-align: center;
 }

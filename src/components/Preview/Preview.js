@@ -5,9 +5,10 @@ import { sortObject } from '../../utils/index';
 
 const Preview = () => {
 
-  const { info, social } = useSelector(state => ({
+  const { info, social, experiences } = useSelector(state => ({
     info: state.profile.info,
-    social: sortObject(state.profile.social, {phone: 1, email: 2, github: 3, linkedin: 4 })
+    social: sortObject(state.profile.social, { phone: 1, email: 2, github: 3, linkedin: 4 }),
+    experiences: state.experience
   }))
 
   const LiSocial = styled.li`
@@ -16,9 +17,9 @@ const Preview = () => {
   `;
 
 
-  const Title = ({ className, title })=> (
+  const Title = ({ className, title }) => (
     <div className={`${className} text-2xl tracking-widest container overflow-hidden font-bold uppercase`}>
-      <span>{title.substring(0,3)}</span>{title.substring(3)}
+      <span>{title.substring(0, 3)}</span>{title.substring(3)}
     </div>
   );
 
@@ -57,12 +58,26 @@ const Preview = () => {
           </ul>
         </div>
       </header>
-      
+
       <body className="text-left">
-        <StyledTitle title="experiences"/>
+        <StyledTitle title="experiences" />
+        {experiences.map((item, index) => (
+          <div className="py-4">
+            <div className="float-right text-right text-sm italic">
+              <p className="colorized">{item.location}</p>
+              <p>{item.start_date} - {item.end_date}</p>
+            </div>
+            <p className="font-bold">{item.title}</p>
+            <ul className="inline-flex divide-x divide-gray-400 text-gray-600 uppercase text-xs font-thin">
+              <li className="pr-2" >{item.company}</li>
+              <li className="pl-2" >{item.type}</li>
+            </ul>
+            <p className="text-justify py-2">{item.desc}</p>
+          </div>
+        ))}
       </body>
 
-     </div>
+    </div>
   )
 }
 

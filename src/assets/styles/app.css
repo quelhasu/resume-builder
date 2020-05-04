@@ -11903,6 +11903,10 @@ video {
   transition-delay: 1000ms;
 }
 
+.colorized{
+  color: #0281CB;
+}
+
 .App {
   text-align: center;
 }
