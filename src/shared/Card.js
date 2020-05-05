@@ -18,8 +18,8 @@ const Card = ({ title, secondary = "", collapsed = false, children }) => {
     <div className={`p-3 rounded overflow-hidden border-solid border border-gray-300 my-3 ${active ? 'border-l-4' : ''}`}>
 
       <header
-        className="flex flex-wrap justify-between items-center cursor-pointer select-none"
-        onClick={toggle}>
+        className={`flex flex-wrap justify-between items-center ${collapsed ? 'cursor-pointer select-none':''}`}
+        onClick={collapsed ? toggle : ''}>
         <p className={`${secondary ? 'w-3/6' : 'w-5/6'} text-sm truncate uppercase  tracking-wider text-gray-800 text-m font-semibold text-left`}>{title}</p>
         <p className={`${secondary ? 'w-2/6' : ''} truncate text-sm font-thin text-gray-500`}>{secondary}</p>
         {collapsed ? (
