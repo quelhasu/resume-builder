@@ -15,12 +15,14 @@ const initialData = [{
   company: 'Amazon',
   location: 'Paris, France',
   desc:  `
-    Automation of data extraction and transformation processes
-    Integration of a Neo4j database with graph generation scripts
-    Development of a REST API to process business logic
-    Development of an interactive dashboard to visualize the data and facilitate analysis
-    Development of an admin dashboard to manage processes and monitor databases
-    Virtualization of micro services in Docker to facilitate reuse in other contexts
+  * Automation of data extraction and transformation processes
+  * Integration of a Neo4j database with graph generation scripts
+  * Development of a REST API to process business logic
+  * Development of an interactive dashboard to visualize the data and facilitate analysis
+  * Development of an admin dashboard to manage processes and monitor databases
+  * Virtualization of micro services in Docker to facilitate reuse in other contexts
+
+<br/>**Stack**: java, css, hello world
     `
 },{
   key: "djziodjiozdjzd",
@@ -30,7 +32,12 @@ const initialData = [{
   end_date: 'aug. 2019',
   company: 'Amazon',
   location: 'Paris, France',
-  desc: 'hezufhezufhziuefhzefuzf'
+  desc: `
+  * Développement application mobile hybride sous Ionic (Ionic 2 , Typescript) 
+
+<br/>**Stack**: Ionic 2 (AngularJS, Cordova) , HTML , Sass , TypeScript
+  `
+  
 }]
 
 export default function expReducer(state = initialData, action){

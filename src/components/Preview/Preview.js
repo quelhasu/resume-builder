@@ -1,15 +1,19 @@
 import React, { useState, useContext } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
+import { PanZoom } from 'react-easy-panzoom'
 import { sortObject } from '../../utils/index';
+import MarkdownPreview from '../../shared/Markdown';
 
 const Preview = () => {
 
-  const { info, social, experiences } = useSelector(state => ({
+  const { info, social, experiences, educations } = useSelector(state => ({
     info: state.profile.info,
     social: sortObject(state.profile.social, { phone: 1, email: 2, github: 3, linkedin: 4 }),
-    experiences: state.experience
+    experiences: state.experience,
+    educations: state.education
   }))
+
 
   const LiSocial = styled.li`
     flex-basis: auto;
@@ -18,7 +22,7 @@ const Preview = () => {
 
 
   const Title = ({ className, title }) => (
-    <div className={`${className} text-2xl tracking-widest container overflow-hidden font-bold uppercase`}>
+    <div className={`${className} mb-3 text-xl tracking-widest container overflow-hidden font-bold uppercase`}>
       <span>{title.substring(0, 3)}</span>{title.substring(3)}
     </div>
   );
@@ -31,52 +35,85 @@ const Preview = () => {
     &:after{
       content:'';
       display:inline-block;
-      width:100%; height:100%;
+      width:100%; 
+      height:100%;
       margin-right:-100%;
       border-bottom:1px solid #717171;
-      margin-bottom: 0.45rem;
+      margin-bottom: 0.40rem;
       margin-left: 0.5rem;
     }
   `;
 
   return (
-    <div className="h-screen col-span-4 p-5">
-      <header className="mb-3">
-        {info.name ?
-          (<p className="text-5xl">
-            <span className="font-thin text-gray-600">{info.name.split(' ')[0]}</span>
-            <span className="font-bold uppercase">{" " + info.name.split(' ')[1]}</span>
-          </p>) : ''
-        }
-        <p className="italic text-gray-400 mb-1">{info.address}</p>
+    <div className="h-screen flex justify-center items-center col-span-4 overflow-hidden">
+      <PanZoom
+        minZoom="0.5"
+        autoCenter
+        autoCenterZoomLevel={0.5}
+        boundaryRatioVertical={0.5}
+        boundaryRatioHorizontal={0.5}
+      >
+        <div id="A4" className="shadow-xl break-words py-2 px-5 border border-gray-400">
+          <header className="">
+            {info.name ?
+              (<p className="text-3xl leading-normal">
+                <span className="font-thin text-gray-600">{info.name.split(' ')[0]}</span>
+                <span className="font-bold uppercase">{" " + info.name.split(' ')[1]}</span>
+              </p>) : ''
+            }
+            <p className="italic text-sm text-gray-500 mb-1">{info.address}</p>
 
-        <div className="">
-          <ul className="inline-flex flex-wrap divide-x divide-gray-400">
-            {Object.entries(social).map(([key, value]) => (
-              <LiSocial className="flex-1 px-4">{value}</LiSocial>
-            ))}
-          </ul>
-        </div>
-      </header>
-
-      <body className="text-left">
-        <StyledTitle title="experiences" />
-        {experiences.map((item, index) => (
-          <div className="py-4">
-            <div className="float-right text-right text-sm italic">
-              <p className="colorized">{item.location}</p>
-              <p>{item.start_date} - {item.end_date}</p>
+            <div className="text-xs px-32">
+              <ul className="flex flex-row justify-between flex-wrap divide-x divide-gray-400">
+                {Object.entries(social).map(([key, value]) => (
+                  <LiSocial key={key} className="flex-1 px-1">{value}</LiSocial>
+                ))}
+              </ul>
             </div>
-            <p className="font-bold">{item.title}</p>
-            <ul className="inline-flex divide-x divide-gray-400 text-gray-600 uppercase text-xs font-thin">
-              <li className="pr-2" >{item.company}</li>
-              <li className="pl-2" >{item.type}</li>
-            </ul>
-            <p className="text-justify py-2">{item.desc}</p>
-          </div>
-        ))}
-      </body>
+          </header>
 
+          <div className="text-left">
+            <StyledTitle title="experiences" />
+            {experiences.map((item, index) => (
+              <div key={item.key} className="flex justify-between mb-4">
+                <div className="">
+                  <h3 className="font-bold text-base leading-3">{item.title}</h3>
+                  <ul className="text-xs leading-3 inline-flex divide-x divide-gray-400 text-gray-600 uppercase font-medium pb-1">
+                    <li className="pr-1" >{item.company}</li>
+                    <li className="pl-1" >{item.type}</li>
+                  </ul>
+                  {item.desc && (
+                    <MarkdownPreview source={item.desc} className="pl-5 text-xs leading-thin" />
+                  )}
+                </div>
+                <div className="flex flex-col text-right items-end text-xs italic">
+                  <p className="colorized leading-3">{item.location}</p>
+                  <p>{item.start_date} - {item.end_date}</p>
+                </div>
+              </div>
+            ))}
+
+            <StyledTitle title="educations" />
+            {educations.map((item, index) => (
+              <div key={item.key} className="flex justify-between mb-4">
+                <div className="w-5/6">
+                  <p className="font-bold text-base leading-3">{item.univ}</p>
+                  <p className="text-xs leading-3 inline-flex divide-x divide-gray-400 text-gray-600 uppercase font-medium pb-1">
+                    {item.type}
+                  </p>
+                  {item.desc && (
+                    <MarkdownPreview source={item.desc} className="text-xs leading-thin" />
+                  )}
+                </div>
+                <div className="flex flex-col text-right items-end text-xs italic">
+                  <p className="colorized leading-3">{item.location}</p>
+                  <p>{item.start_date} - {item.end_date}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </PanZoom>
     </div>
   )
 }

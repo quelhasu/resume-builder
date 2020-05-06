@@ -11903,6 +11903,17 @@ video {
   transition-delay: 1000ms;
 }
 
+page {
+  background: white;
+  display: block;
+  margin: 0 auto;
+}
+
+#A4 {
+  width: 21cm;
+  min-height: 29.7cm;
+}
+
 .colorized{
   color: #0281CB;
 }

@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react';
 import Profile from './sections/Profile'; 
-import Experiences from './sections/Experiences'
+import Experiences from './sections/Experience'
+import Educations from './sections/Education'
 
 const Sidebar = () => {
 
@@ -8,6 +9,7 @@ const Sidebar = () => {
     <div id="sidebar" className="h-screen col-span-2 px-3 py-4 shadow-xl h-screen overflow-y-scroll">
       <Profile/>
       <Experiences/>
+      <Educations/>
     </div>
   );
 };

@@ -4,10 +4,12 @@ import thunk from 'redux-thunk'
 
 import profile from '../redux/profile'
 import experience from '../redux/experience'
+import education from '../redux/education'
 
 const rootReducer = combineReducers({
   profile,
-  experience
+  experience,
+  education
 })
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
