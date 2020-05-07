@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import { PanZoom } from 'react-easy-panzoom'
 import { sortObject } from '../../utils/index';
 import MarkdownPreview from '../../shared/Markdown';
+import MenuActionsFile from '../../shared/MenuActionsFile'
+import moment from 'moment'
 
 const Preview = () => {
 
@@ -17,6 +19,20 @@ const Preview = () => {
     hobbies: state.item.hobbies
 
   }))
+
+  async function exportFile()  {
+    const date = moment(new Date()).format("DD-MM-YYYY")
+    const fileName =`${info.name.split(' ')[0]}-${info.name.split(' ')[1]}-${date}`
+    const json = JSON.stringify({info, social, experiences, educations, projects, languages, hobbies})
+    const blob = new Blob([json], {type: 'application/json'})
+    const href = await URL.createObjectURL(blob)
+    const link = document.createElement('a')
+    link.href = href
+    link.download = fileName + ".json"
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+  }
 
 
   const LiSocial = styled.li`
@@ -49,11 +65,12 @@ const Preview = () => {
   `;
 
   return (
-    <div className="h-screen flex justify-center items-center col-span-4 overflow-hidden">
+    <div className="h-screen flex justify-center  col-span-4 overflow-hidden">
+      <MenuActionsFile className="" exportFile={exportFile}/>
       <PanZoom
         minZoom="0.5"
         autoCenter
-        autoCenterZoomLevel={0.5}
+        autoCenterZoomLevel={0.75}
         boundaryRatioVertical={0.5}
         boundaryRatioHorizontal={0.5}
       >
