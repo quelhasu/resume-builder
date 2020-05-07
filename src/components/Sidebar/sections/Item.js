@@ -5,94 +5,62 @@ import TextArea from '../../../shared/TextArea';
 import TextField from '../../../shared/TextField';
 import ButtonIcon from '../../../shared/ButtonIcon';
 
-import { createExp, deleteExp, modifyExp } from '../../../redux/experience'
+import { createItem, deleteItem, modifyItem } from '../../../redux/item'
 
-const Experiences = () => {
+const Items = ({type = ""}) => {
 
-  const { experiences } = useSelector(state => ({
-    experiences: state.experience
+  const { items } = useSelector(state => ({
+    items: state.item[type]
   }))
 
 
   return (
     <div>
-      <Card title="Work Experiences">
-        {experiences.map((item, index) => (
-          <Form key={item.key} item={item} collapsed={true} modify={true} />
+      <Card title={type}>
+        {items && items.map((item, index) => (
+          <Form key={item.key} element={item} collapsed={true} modify={true} type={type}/>
         ))}
-        <Form collapsed={true} modify={false} />
+        <Form collapsed={true} modify={false} type={type}/>
       </Card>
     </div>
   )
 }
 
-const Form = ({ collapsed = false, item = {}, modify = false }) => {
+const Form = ({ collapsed = false, element = {}, modify = false, type = '' }) => {
   const dispatch = useDispatch()
 
-  const [exp, setExp] = useState(item)
+  const [item, setItem] = useState(element)
 
   const [active, setActive] = useState(collapsed)
 
   const onChange = (e) => {
-    setExp({ ...exp, [e.target.name]: e.target.value })
+    setItem({ ...item, [e.target.name]: e.target.value })
   }
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (modify) dispatch(modifyExp(exp))
+    if (modify) dispatch(modifyItem(item, type))
     else {
-      dispatch(createExp(exp))
-      setExp({})
+      dispatch(createItem(item, type))
+      setItem({})
     }
   }
 
   const handleDelete = (e) => {
-    dispatch(deleteExp(exp))
+    dispatch(deleteItem(item, type))
   }
 
   return (
-    <Card title={exp.title || "Add New Experience"} secondary={exp.company || ""} collapsed={active}>
+    <Card title={item.name || `Add New ${type}`} secondary={""} collapsed={active}>
       <form onSubmit={handleSubmit}>
         <TextField
-          placeholder="Data Engineer" value={exp.title}
-          name="title" label="Title"
+          placeholder="Resume Builder" value={item.name}
+          name="name" label="Name"
           onChange={onChange}
         />
-        <TextField
-          placeholder="Intern" value={exp.type}
-          name="type" label="Type"
-          onChange={onChange}
-        />
-        <div className="grid grid-cols-2 col-gap-4">
-          <TextField
-            classname="flex flex-col"
-            placeholder="apr. 2019" value={exp.start_date}
-            name="start_date" label="Start date"
-            onChange={onChange}
-          />
-          <TextField
-            classname="flex flex-col"
-            placeholder="aug. 2019" value={exp.end_date}
-            name="end_date" label="End date"
-            onChange={onChange}
-          />
-        </div>
-        <div className="grid grid-cols-2 col-gap-4">
-          <TextField
-            classname="flex flex-col"
-            placeholder="Amazon" value={exp.company}
-            name="company" label="Company"
-            onChange={onChange}
-          />
-          <TextField
-            classname="flex flex-col"
-            placeholder="Paris, France" value={exp.location}
-            name="location" label="Location"
-            onChange={onChange}
-          />
-        </div>
+
         <TextArea
-          placeholder="Description..." value={exp.desc}
+          placeholder="Description..." value={item.desc}
           name="desc" label="Description"
           onChange={onChange} />
         <p class="text-gray-600 text-xs italic text-left ">
@@ -124,4 +92,4 @@ const Form = ({ collapsed = false, item = {}, modify = false }) => {
   )
 }
 
-export default Experiences;
+export default Items;

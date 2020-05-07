@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import Profile from './sections/Profile'; 
 import Experiences from './sections/Experience'
 import Educations from './sections/Education'
+import Item from './sections/Item'
 
 const Sidebar = () => {
 
@@ -10,6 +11,9 @@ const Sidebar = () => {
       <Profile/>
       <Experiences/>
       <Educations/>
+      <Item type="projects"/>
+      <Item type="languages"/>
+      <Item type="hobbies"/>
     </div>
   );
 };

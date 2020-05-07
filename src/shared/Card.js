@@ -40,7 +40,7 @@ const Card = ({ title, secondary = "", collapsed = false, children }) => {
 
 
       <div
-        className={`transition-maxHeight duration-500 ease-out overflow-auto`}
+        className={`transition-maxHeight duration-500 ease-out overflow-hidden`}
         ref={content}
         style={collapsed ? { maxHeight: `${height}` } : {}}>
         {children}

@@ -7,11 +7,15 @@ import MarkdownPreview from '../../shared/Markdown';
 
 const Preview = () => {
 
-  const { info, social, experiences, educations } = useSelector(state => ({
+  const { info, social, experiences, educations, projects, languages, hobbies } = useSelector(state => ({
     info: state.profile.info,
     social: sortObject(state.profile.social, { phone: 1, email: 2, github: 3, linkedin: 4 }),
     experiences: state.experience,
-    educations: state.education
+    educations: state.education,
+    projects: state.item.projects,
+    languages: state.item.languages,
+    hobbies: state.item.hobbies
+
   }))
 
 
@@ -78,7 +82,7 @@ const Preview = () => {
               <div key={item.key} className="flex justify-between mb-4">
                 <div className="">
                   <h3 className="font-bold text-base leading-3">{item.title}</h3>
-                  <ul className="text-xs leading-3 inline-flex divide-x divide-gray-400 text-gray-600 uppercase font-medium pb-1">
+                  <ul className="text-xs leading-3 inline-flex divide-x divide-gray-400 text-gray-600 uppercase font-medium mb-1">
                     <li className="pr-1" >{item.company}</li>
                     <li className="pl-1" >{item.type}</li>
                   </ul>
@@ -98,7 +102,7 @@ const Preview = () => {
               <div key={item.key} className="flex justify-between mb-4">
                 <div className="w-5/6">
                   <p className="font-bold text-base leading-3">{item.univ}</p>
-                  <p className="text-xs leading-3 inline-flex divide-x divide-gray-400 text-gray-600 uppercase font-medium pb-1">
+                  <p className="text-xs leading-3 inline-flex divide-x divide-gray-400 text-gray-600 uppercase font-medium mb-1">
                     {item.type}
                   </p>
                   {item.desc && (
@@ -111,6 +115,59 @@ const Preview = () => {
                 </div>
               </div>
             ))}
+
+            <StyledTitle title="Publication" />
+            <div className="flex justify-between mb-4">
+
+            </div>
+
+            <StyledTitle title="Project" />
+            <div className="flex justify-between mb-4">
+              <div>
+                {projects.map((item, index) => (
+                  <p key={item.key} className="font-bold text-base">{item.name}</p>
+                ))}
+              </div>
+              <div>
+                {projects.map((item, index) => (
+                  <p key={item.key} className="text-sm ">{item.desc}</p>
+                ))}
+              </div>
+            </div>
+
+            <div className="flex justify-between -mx-8">
+              <div class="w-1/2 px-8">
+                <StyledTitle title="Languages" />
+                <div className="flex justify-between mb-4">
+                  <div className="w-1/4">
+                    {languages && languages.map((item, index) => (
+                      <p key={item.key} className="font-bold text-base">{item.name}</p>
+                    ))}
+                  </div>
+                  <div className="w-3/4">
+                    {languages && languages.map((item, index) => (
+                      <p key={item.key} className="text-sm ">{item.desc}</p>
+                    ))}
+                  </div>
+                </div>
+              </div>
+              <div class="w-1/2 px-8">
+                <StyledTitle title="Hobbies" />
+                <div className="flex justify-between mb-4">
+                  <div className="w-1/4">
+                    {hobbies && hobbies.map((item, index) => (
+                      <p key={item.key} className="font-bold text-base">{item.name}</p>
+                    ))}
+                  </div>
+                  <div className="w-3/4">
+                    {hobbies && hobbies.map((item, index) => (
+                      <p key={item.key} className="text-sm ">{item.desc}</p>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       </PanZoom>
