@@ -5,12 +5,12 @@ import TextArea from '../../../shared/TextArea';
 import TextField from '../../../shared/TextField';
 import ButtonIcon from '../../../shared/ButtonIcon';
 
-import { createEdu, deleteEdu, modifyEdu } from '../../../redux/education'
+import { createEdu, deleteEdu, modifyEdu } from '../../../redux/educations'
 
 const Educations = () => {
 
   const { educations } = useSelector(state => ({
-    educations: state.education
+    educations: state.educations
   }))
 
 

@@ -7,16 +7,8 @@ const UPDATE_SOCIAL = 'UPDATE_SOCIAL'
 // Reducers
 
 const initialData = {
-  info: {
-    name: 'Ugo Quelhas',
-    address: '84 route de saint nom',
-  },
-  social:{
-    phone:'(+33) 1 00 00 00 00',
-    email: 'address@email.me',
-    github:'@quelhasu',
-    linkedin: '@quelhasugo'
-  }
+  info: {},
+  social:{}
 }
 
 export default function profileReducer(state = initialData, action){

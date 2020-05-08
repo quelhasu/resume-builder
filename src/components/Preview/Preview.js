@@ -5,6 +5,7 @@ import { PanZoom } from 'react-easy-panzoom'
 import { sortObject } from '../../utils/index';
 import MarkdownPreview from '../../shared/Markdown';
 import MenuActionsFile from '../../shared/MenuActionsFile'
+import { toast } from 'react-toastify';
 import moment from 'moment'
 
 const Preview = () => {
@@ -12,8 +13,8 @@ const Preview = () => {
   const { info, social, experiences, educations, projects, languages, hobbies } = useSelector(state => ({
     info: state.profile.info,
     social: sortObject(state.profile.social, { phone: 1, email: 2, github: 3, linkedin: 4 }),
-    experiences: state.experience,
-    educations: state.education,
+    experiences: state.experiences,
+    educations: state.educations,
     projects: state.item.projects,
     languages: state.item.languages,
     hobbies: state.item.hobbies
@@ -23,7 +24,12 @@ const Preview = () => {
   async function exportFile()  {
     const date = moment(new Date()).format("DD-MM-YYYY")
     const fileName =`${info.name.split(' ')[0]}-${info.name.split(' ')[1]}-${date}`
-    const json = JSON.stringify({info, social, experiences, educations, projects, languages, hobbies})
+    const json = JSON.stringify({
+      profile:{info, social}, 
+      experiences, 
+      educations, 
+      item: {projects, languages, hobbies}
+    })
     const blob = new Blob([json], {type: 'application/json'})
     const href = await URL.createObjectURL(blob)
     const link = document.createElement('a')
@@ -32,6 +38,8 @@ const Preview = () => {
     document.body.appendChild(link)
     link.click()
     document.body.removeChild(link)
+    setTimeout(()=>{toast.info('Export start..')}, 100)
+    
   }
 
 

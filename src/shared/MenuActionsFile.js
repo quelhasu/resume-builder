@@ -1,7 +1,34 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { FilePicker } from 'react-file-picker'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { ToastContainer, toast } from 'react-toastify';
+import { updateResume, deleteResume } from '../redux/store'
+import { useDispatch } from 'react-redux';
 
 const MenuActionsFile = ({ classNameName = '', exportFile }) => {
+  const dispatch = useDispatch()
+  // const [file, setFile] = useState('')
+
+  const onChange = (e) => {
+    // const fr = new FileReader();
+
+    console.log(e)
+    // const json = require(e);
+  }
+
+  const handleFile = (event) => {
+    const content = event.target.result
+    const json = JSON.parse(content)
+    dispatch(updateResume(json))
+  }
+
+  function upload(file) {
+    var fileData = new FileReader()
+    fileData.onloadend = handleFile
+    fileData.readAsText(file)
+  }
+  
+
   return (
     // <div classNameName={`${classNameName}`}>
     // <ul classNameName={`flex justify-between  p-2`}>
@@ -14,16 +41,23 @@ const MenuActionsFile = ({ classNameName = '', exportFile }) => {
       {/* <img src="https://www.freepnglogos.com/uploads/spotify-logo-png/file-spotify-logo-png-4.png"
         alt="alt placeholder" className="w-8 h-8 mx-auto mb-5" /> */}
       <span className="cursor-pointer hover:bg-gray-200 hover:text-gray-700 px-2 block mb-5" onClick={exportFile}>
-        <FontAwesomeIcon  icon="file-export" />
+        <FontAwesomeIcon icon="file-export" />
         {/* <span class="mx-2">Export</span> */}
       </span>
-      <span className="cursor-pointer hover:bg-gray-200 hover:text-gray-700 px-2 block mb-5">
-      <FontAwesomeIcon className="" icon="file-import" />
-      {/* <span class="mx-2">Import</span> */}
+
+      <FilePicker
+        extensions={['json']}
+        onChange={upload}
+        onError={err => {toast.error('Please, select a JSON file')}}
+        >
+      <span  className="cursor-pointer hover:bg-gray-200 hover:text-gray-700 px-2 block mb-5">
+        <FontAwesomeIcon className="" icon="file-import" />
       </span>
+      </FilePicker>
+      {/* <span class="mx-2">Import</span> */}
       <span className="cursor-pointer hover:bg-gray-200 hover:text-gray-700 px-2 block relative">
-      <FontAwesomeIcon className="" icon="file-download" />
-      {/* <span class="mx-2">Download</span> */}
+        <FontAwesomeIcon className="" icon="file-download" />
+        {/* <span class="mx-2">Download</span> */}
         {/* <span
             className="absolute right-0 top-0 -mt-2 text-xs bg-yellow-500 text-black font-medium px-2 shadow-lg rounded-full border-2 border-white">3</span> */}
       </span>

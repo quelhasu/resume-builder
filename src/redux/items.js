@@ -7,16 +7,7 @@ const MODIFY_ITEM = 'MODIFY_ITEM'
 
 // Reducers
 const initialData = {
-  projects: [{
-    key: 'hdzehdeziuhdize',
-    name: "Neo4Tourism",
-    desc: `Framework under Docker developed during the 4th year internship (Dashboard, API, Database,...)`
-  },
-  {
-    key: 'dzeijodze',
-    name: "JQuiz",
-    desc: "Projet personnel, plateforme de création et lecture de quiz en format JSON"
-  }],
+  projects: [],
   languages:[],
   hobbies:[]
 }

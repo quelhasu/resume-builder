@@ -1,4 +1,6 @@
 import React from 'react';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 import Sidebar from './components/Sidebar/Sidebar';
 import Preview from './components/Preview/Preview';
@@ -17,6 +19,17 @@ function App() {
       <div className="h-screen grid grid-cols-6 items-center">
         <Sidebar />
         <Preview />
+        <ToastContainer
+          position="bottom-center"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+        />
       </div>
     </div>
   );

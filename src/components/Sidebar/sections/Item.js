@@ -5,7 +5,7 @@ import TextArea from '../../../shared/TextArea';
 import TextField from '../../../shared/TextField';
 import ButtonIcon from '../../../shared/ButtonIcon';
 
-import { createItem, deleteItem, modifyItem } from '../../../redux/item'
+import { createItem, deleteItem, modifyItem } from '../../../redux/items'
 
 const Items = ({type = ""}) => {
 

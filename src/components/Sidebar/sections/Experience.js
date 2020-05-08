@@ -5,12 +5,12 @@ import TextArea from '../../../shared/TextArea';
 import TextField from '../../../shared/TextField';
 import ButtonIcon from '../../../shared/ButtonIcon';
 
-import { createExp, deleteExp, modifyExp } from '../../../redux/experience'
+import { createExp, deleteExp, modifyExp } from '../../../redux/experiences'
 
 const Experiences = () => {
 
   const { experiences } = useSelector(state => ({
-    experiences: state.experience
+    experiences: state.experiences
   }))
 
 
