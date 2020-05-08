@@ -4,9 +4,7 @@ import styled from 'styled-components';
 import { PanZoom } from 'react-easy-panzoom'
 import { sortObject } from '../../utils/index';
 import MarkdownPreview from '../../shared/Markdown';
-import MenuActionsFile from '../../shared/MenuActionsFile'
-import { toast } from 'react-toastify';
-import moment from 'moment'
+import MenuActionsFile from './MenuActionsFile'
 
 const Preview = () => {
 
@@ -20,28 +18,6 @@ const Preview = () => {
     hobbies: state.item.hobbies
 
   }))
-
-  async function exportFile()  {
-    const date = moment(new Date()).format("DD-MM-YYYY")
-    const fileName =`${info.name.split(' ')[0]}-${info.name.split(' ')[1]}-${date}`
-    const json = JSON.stringify({
-      profile:{info, social}, 
-      experiences, 
-      educations, 
-      item: {projects, languages, hobbies}
-    })
-    const blob = new Blob([json], {type: 'application/json'})
-    const href = await URL.createObjectURL(blob)
-    const link = document.createElement('a')
-    link.href = href
-    link.download = fileName + ".json"
-    document.body.appendChild(link)
-    link.click()
-    document.body.removeChild(link)
-    setTimeout(()=>{toast.info('Export start..')}, 100)
-    
-  }
-
 
   const LiSocial = styled.li`
     flex-basis: auto;
@@ -74,7 +50,15 @@ const Preview = () => {
 
   return (
     <div className="h-screen flex justify-center  col-span-4 overflow-hidden">
-      <MenuActionsFile className="" exportFile={exportFile}/>
+      <MenuActionsFile 
+        className=""
+        fileName={info.name && `${info.name.split(' ')[0]}-${info.name.split(' ')[1]}`}
+        objectToExport={{
+          profile:{info, social}, 
+          experiences, 
+          educations, 
+          item: {projects, languages, hobbies}
+        }}  />
       <PanZoom
         minZoom="0.5"
         autoCenter

@@ -3,7 +3,6 @@ import Profile from './sections/Profile';
 import Experiences from './sections/Experience'
 import Educations from './sections/Education'
 import Item from './sections/Item'
-import MenuActions from '../../shared/MenuActionsFile';
 
 const Sidebar = () => {
 

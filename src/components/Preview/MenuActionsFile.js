@@ -2,10 +2,11 @@ import React, { useState } from 'react'
 import { FilePicker } from 'react-file-picker'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { ToastContainer, toast } from 'react-toastify';
-import { updateResume, deleteResume } from '../redux/store'
+import { updateResume, deleteResume } from '../../redux/store'
 import { useDispatch } from 'react-redux';
+import { uploadFile, exportFile } from '../../utils/index'
 
-const MenuActionsFile = ({ classNameName = '', exportFile }) => {
+const MenuActionsFile = ({ classNameName = '', fileName,  objectToExport}) => {
   const dispatch = useDispatch()
   // const [file, setFile] = useState('')
 
@@ -15,20 +16,7 @@ const MenuActionsFile = ({ classNameName = '', exportFile }) => {
     console.log(e)
     // const json = require(e);
   }
-
-  const handleFile = (event) => {
-    const content = event.target.result
-    const json = JSON.parse(content)
-    dispatch(updateResume(json))
-  }
-
-  function upload(file) {
-    var fileData = new FileReader()
-    fileData.onloadend = handleFile
-    fileData.readAsText(file)
-  }
   
-
   return (
     // <div classNameName={`${classNameName}`}>
     // <ul classNameName={`flex justify-between  p-2`}>
@@ -40,14 +28,14 @@ const MenuActionsFile = ({ classNameName = '', exportFile }) => {
     <div className="absolute right-0 py-4 px-2 mx-4 my-2 text-gray-900 bg-white rounded-md text-left capitalize font-medium shadow-lg ">
       {/* <img src="https://www.freepnglogos.com/uploads/spotify-logo-png/file-spotify-logo-png-4.png"
         alt="alt placeholder" className="w-8 h-8 mx-auto mb-5" /> */}
-      <span className="cursor-pointer hover:bg-gray-200 hover:text-gray-700 px-2 block mb-5" onClick={exportFile}>
+      <span className="cursor-pointer hover:bg-gray-200 hover:text-gray-700 px-2 block mb-5" onClick={file => exportFile(fileName, objectToExport)}>
         <FontAwesomeIcon icon="file-export" />
         {/* <span class="mx-2">Export</span> */}
       </span>
 
       <FilePicker
         extensions={['json']}
-        onChange={upload}
+        onChange={file => uploadFile(file, dispatch, updateResume)}
         onError={err => {toast.error('Please, select a JSON file')}}
         >
       <span  className="cursor-pointer hover:bg-gray-200 hover:text-gray-700 px-2 block mb-5">
