@@ -1,5 +1,4 @@
-/* purgecss start ignore */
-@tailwind base;
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;1,200;1,300;1,400;1,600;1,700&family=Rubik&display=swap');@tailwind base;
 @tailwind components;
 /* purgecss end ignore */
 
@@ -12,11 +11,13 @@ page {
 }
 
 #A4 {
+    font-family: 'Nunito', sans-serif;
     width: 21cm;
     min-height: 29.7cm; 
 }
 
 .App {
+  font-family: 'Rubik', sans-serif;
   text-align: center;
 }
 
