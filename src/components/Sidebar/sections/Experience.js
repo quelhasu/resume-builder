@@ -95,7 +95,7 @@ const Form = ({ collapsed = false, item = {}, modify = false }) => {
           placeholder="Description..." value={exp.desc}
           name="desc" label="Description"
           onChange={onChange} />
-        <p class="text-gray-600 text-xs italic text-left ">
+        <p className="text-gray-600 text-xs italic text-left ">
           You can use <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet" className="px-1">
           Markdown syntax </a> to write your description.
         </p>

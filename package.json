@@ -18,6 +18,7 @@
     "moment": "^2.25.3",
     "postcss-import": "^12.0.1",
     "react": "^16.13.1",
+    "react-color": "^2.18.1",
     "react-dom": "^16.13.1",
     "react-easy-panzoom": "^0.4.4",
     "react-file-picker": "0.0.6",
@@ -33,7 +34,8 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "build:css": "postcss src/assets/styles/tailwind.css -o src/assets/styles/app.css",
-    "watch:css": "postcss src/assets/styles/tailwind.css -o src/assets/styles/app.css -w"
+    "watch:css": "postcss src/assets/styles/tailwind.css -o src/assets/styles/app.css -w",
+    "postbuild": "purgecss --css build/static/css/*.css --content build/index.html build/static/js/*.js --output build/static/css"
   },
   "eslintConfig": {
     "extends": "react-app"

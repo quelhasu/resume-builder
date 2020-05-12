@@ -6,6 +6,7 @@ import profile from '../redux/profile'
 import experiences from './experiences'
 import educations from './educations'
 import item from './items'
+import options from './options'
 
 // Constant
 const DELETE_RESUME = 'DELETE_RESUME'
@@ -16,7 +17,8 @@ const appReducer = combineReducers({
   profile,
   experiences,
   educations,
-  item
+  item,
+  options
 })
 
 const rootReducer = (state, action) => {
@@ -25,7 +27,7 @@ const rootReducer = (state, action) => {
       state = undefined
       break;
     case UPDATE_RESUME: 
-      state = action.payload
+      state = {...state, ...action.payload}
       break;
     default:
       break;

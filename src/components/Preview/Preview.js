@@ -8,15 +8,15 @@ import MenuActionsFile from './MenuActionsFile'
 
 const Preview = () => {
 
-  const { info, social, experiences, educations, projects, languages, hobbies } = useSelector(state => ({
+  const { info, social, experiences, educations, projects, languages, hobbies, color } = useSelector(state => ({
     info: state.profile.info,
     social: sortObject(state.profile.social, { phone: 1, email: 2, github: 3, linkedin: 4 }),
     experiences: state.experiences,
     educations: state.educations,
     projects: state.item.projects,
     languages: state.item.languages,
-    hobbies: state.item.hobbies
-
+    hobbies: state.item.hobbies,
+    color: state.options.color
   }))
 
   const LiSocial = styled.li`
@@ -31,9 +31,13 @@ const Preview = () => {
     </div>
   );
 
+  const Information = styled.p`
+  color: ${color};
+  `
+
   const StyledTitle = styled(Title)`
     &>span{
-      color: #0281CB;
+      color: ${color};
     }
 
     &:after{
@@ -100,7 +104,7 @@ const Preview = () => {
                   )}
                 </div>
                 <div className="flex flex-col text-right items-end text-xs italic">
-                  <p className="colorized leading-3">{item.location}</p>
+                  <Information className="leading-3">{item.location}</Information>
                   <p>{item.start_date} - {item.end_date}</p>
                 </div>
               </div>
@@ -119,7 +123,7 @@ const Preview = () => {
                   )}
                 </div>
                 <div className="flex flex-col text-right items-end text-xs italic">
-                  <p className="colorized leading-3">{item.location}</p>
+                  <Information className=" leading-3">{item.location}</Information>
                   <p>{item.start_date} - {item.end_date}</p>
                 </div>
               </div>
