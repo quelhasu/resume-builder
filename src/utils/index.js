@@ -1,5 +1,40 @@
 import { toast } from 'react-toastify';
 import moment from 'moment'
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
+
+function setPanZoom(panZoomRef, ratio) {
+  panZoomRef.current.autoCenter(ratio)
+  panZoomRef.current.reset()
+}
+
+function printFile(fileName, pageRef, panZoomRef) {
+  const date = moment(new Date()).format("DD-MM-YYYY")
+  const filename = `${fileName}-${date}`
+  setPanZoom(panZoomRef, 1);
+  toast.info('Download PDF will start...')
+  setTimeout(() => {
+    html2canvas(pageRef.current, {
+      scale: 2,
+      useCORS: true,
+    }).then((canvas) => {
+      const imgData = canvas.toDataURL('image/jpeg', 1);
+      const pdf = new jsPDF({
+        orientation: 'portrait',
+      });
+      const pageHeight = pdf.internal.pageSize.getHeight();
+
+      const ratio = pageHeight / canvas.height
+
+      const width = canvas.width * ratio
+      const height = canvas.height * ratio
+
+
+      pdf.addImage(imgData, 'JPEG', 0, 0, width, height, null, 'slow', 'portrait')
+      pdf.save(`${fileName}-${date}.pdf`);
+    })
+  }, 500);
+}
 
 const sortObject = (obj = Object, order = Object) => {
   var sortable = []
@@ -33,11 +68,11 @@ function uploadFile(file, dispatch, action) {
   toast.success('File Uploaded!')
 }
 
-async function exportFile(fileName, objectToExport)  {
+async function exportFile(fileName, objectToExport) {
   const date = moment(new Date()).format("DD-MM-YYYY")
   const filename = `${fileName}-${date}`
   const json = JSON.stringify(objectToExport)
-  const blob = new Blob([json], {type: 'application/json'})
+  const blob = new Blob([json], { type: 'application/json' })
   const href = await URL.createObjectURL(blob)
   const link = document.createElement('a')
   link.href = href
@@ -50,6 +85,7 @@ async function exportFile(fileName, objectToExport)  {
 
 export {
   sortObject,
-  uploadFile, 
-  exportFile
+  uploadFile,
+  exportFile,
+  printFile
 }

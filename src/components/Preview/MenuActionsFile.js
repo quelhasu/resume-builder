@@ -4,12 +4,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { toast } from 'react-toastify';
 import { updateResume } from '../../redux/store'
 import { useDispatch, useSelector } from 'react-redux';
-import { uploadFile, exportFile } from '../../utils/index'
+import { uploadFile, exportFile, printFile } from '../../utils/index'
 import { changeColor } from '../../redux/options'
 import { SketchPicker } from 'react-color'
 import styled from 'styled-components'
 
-const MenuActionsFile = ({ classNameName = '', fileName, objectToExport }) => {
+const MenuActionsFile = ({ pageRef, panZoomRef,  classNameName = '', fileName, objectToExport }) => {
   const dispatch = useDispatch()
 
   const [colorPickerState, setColorPickerState] = useState(false);
@@ -56,8 +56,8 @@ const MenuActionsFile = ({ classNameName = '', fileName, objectToExport }) => {
           </span>
         </FilePicker>
 
-        <span className="cursor-pointer flex cursor-pointer p-2 hover:bg-gray-200 hover:text-gray-700 rounded" >
-          {/* onClick={file => exportFile(fileName, objectToExport)}> */}
+        <span className="cursor-pointer flex cursor-pointer p-2 hover:bg-gray-200 hover:text-gray-700 rounded" 
+          onClick={e => printFile(fileName, pageRef, panZoomRef)}>
           <i className="w-8 p-2 bg-gray-200 rounded-full">
             <FontAwesomeIcon className="" icon="file-download" />
           </i>

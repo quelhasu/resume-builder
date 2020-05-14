@@ -10,7 +10,6 @@ const Card = ({ title, secondary = "", collapsed = false, children }) => {
 
   useEffect(() => {
     const { current } = content;
-
     autosize(current)
   });
 

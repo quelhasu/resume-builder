@@ -1,10 +1,11 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { PanZoom } from 'react-easy-panzoom'
 import { sortObject } from '../../utils/index';
 import MarkdownPreview from '../../shared/Markdown';
 import MenuActionsFile from './MenuActionsFile'
+import { View as ViewPDF } from '@react-pdf/renderer';
 
 const Preview = () => {
 
@@ -19,11 +20,13 @@ const Preview = () => {
     color: state.options.color
   }))
 
+  const page = useRef();
+  const panZoom = useRef();
+
   const LiSocial = styled.li`
     flex-basis: auto;
     min-width: 100px;        
   `;
-
 
   const Title = ({ className, title }) => (
     <div className={`${className} mb-3 text-xl tracking-widest container overflow-hidden font-bold uppercase`}>
@@ -55,6 +58,8 @@ const Preview = () => {
   return (
     <div className="h-screen flex justify-center  col-span-4 overflow-hidden">
       <MenuActionsFile 
+        pageRef={page}
+        panZoomRef={panZoom}
         className=""
         fileName={info.name && `${info.name.split(' ')[0]}-${info.name.split(' ')[1]}`}
         objectToExport={{
@@ -66,11 +71,12 @@ const Preview = () => {
       <PanZoom
         minZoom="0.5"
         autoCenter
+        ref={panZoom}
         autoCenterZoomLevel={0.75}
         boundaryRatioVertical={0.5}
         boundaryRatioHorizontal={0.5}
       >
-        <div id="A4" className="shadow-xl break-words py-2 px-5 border border-gray-400">
+        <div id="A4" ref={page} className="shadow-xl bg-white break-words py-2 px-5 border border-gray-400">
           <header className="">
             {info.name ?
               (<p className="text-3xl leading-normal">
