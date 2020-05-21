@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import TextField from '../../../shared/TextField';
 import Card from '../../../shared/Card';
 
@@ -6,17 +6,22 @@ import { updateProfile, updateSocial } from '../../../redux/profile'
 import { useDispatch, useSelector } from 'react-redux';
 
 const Profile = () => {
+  const { profile } = useSelector(state => ({
+    profile: state.profile
+  }))
+
+  return (
+    <Forms item={profile} />
+  )
+};
+
+const Forms = ({ item = {} }) => {
   const dispatch = useDispatch()
 
-  const [profile, setProfile] = useState({
-    name: '',
-    address: '',
-  })
+  const [profile, setProfile] = useState(item.info)
+  const [social, setSocial] = useState(item.social)
 
-  const [social, setSocial] = useState({
-    github: '',
-  })
-
+  console.log(item)
   const onChange = (e, type) => {
     switch (type) {
       case "profile":
@@ -28,7 +33,6 @@ const Profile = () => {
       default:
         break;
     }
-    
   }
 
   return (
@@ -64,7 +68,7 @@ const Profile = () => {
           onBlur={e => dispatch(updateSocial(social))}
         />
 
-      <TextField
+        <TextField
           className=""
           placeholder="address@email.me"
           value={social.email}
@@ -93,9 +97,8 @@ const Profile = () => {
           onBlur={e => dispatch(updateSocial(social))}
         />
       </Card>
-
     </div>
   );
-};
+}
 
 export default Profile;

@@ -7,6 +7,7 @@ import MarkdownPreview from '../../shared/Markdown';
 import MenuActionsFile from './MenuActionsFile'
 import { View as ViewPDF } from '@react-pdf/renderer';
 
+
 const Preview = () => {
 
   const { info, social, experiences, educations, projects, languages, hobbies, color } = useSelector(state => ({
@@ -57,17 +58,17 @@ const Preview = () => {
 
   return (
     <div className="h-screen flex justify-center  col-span-4 overflow-hidden">
-      <MenuActionsFile 
+      <MenuActionsFile
         pageRef={page}
         panZoomRef={panZoom}
         className=""
         fileName={info.name && `${info.name.split(' ')[0]}-${info.name.split(' ')[1]}`}
         objectToExport={{
-          profile:{info, social}, 
-          experiences, 
-          educations, 
-          item: {projects, languages, hobbies}
-        }}  />
+          profile: { info, social },
+          experiences,
+          educations,
+          item: { projects, languages, hobbies }
+        }} />
       <PanZoom
         minZoom="0.5"
         autoCenter
@@ -85,12 +86,12 @@ const Preview = () => {
               </p>) : ''
             }
             <p className="italic text-sm text-gray-500 mb-1">{info.address}</p>
-
             <div className="text-xs px-32">
-              <ul className="flex flex-row justify-between flex-wrap divide-x divide-gray-400">
-                {Object.entries(social).map(([key, value]) => (
-                  <LiSocial key={key} className="flex-1 px-1">{value}</LiSocial>
-                ))}
+              <ul className="flex flex-row justify-between flex-wrap">
+                {Object.entries(social).map(([key, value]) => {
+                  if(value !== "") return (<LiSocial key={key} className="flex-1 px-1">{value}</LiSocial>)
+                  else return ('')
+                })}
               </ul>
             </div>
           </header>

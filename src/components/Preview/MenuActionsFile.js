@@ -9,7 +9,7 @@ import { changeColor } from '../../redux/options'
 import { SketchPicker } from 'react-color'
 import styled from 'styled-components'
 
-const MenuActionsFile = ({ pageRef, panZoomRef,  classNameName = '', fileName, objectToExport }) => {
+const MenuActionsFile = ({ pageRef, panZoomRef, classNameName = '', fileName, objectToExport }) => {
   const dispatch = useDispatch()
 
   const [colorPickerState, setColorPickerState] = useState(false);
@@ -56,7 +56,7 @@ const MenuActionsFile = ({ pageRef, panZoomRef,  classNameName = '', fileName, o
           </span>
         </FilePicker>
 
-        <span className="cursor-pointer flex cursor-pointer p-2 hover:bg-gray-200 hover:text-gray-700 rounded" 
+        <span className="cursor-pointer flex cursor-pointer p-2 hover:bg-gray-200 hover:text-gray-700 rounded"
           onClick={e => printFile(fileName, pageRef, panZoomRef)}>
           <i className="w-8 p-2 bg-gray-200 rounded-full">
             <FontAwesomeIcon className="" icon="file-download" />
@@ -74,9 +74,12 @@ const MenuActionsFile = ({ pageRef, panZoomRef,  classNameName = '', fileName, o
             </div>
           </div>
         ) : null}
+
       </div>
     </div>
   )
 }
+
+
 
 export default MenuActionsFile;
