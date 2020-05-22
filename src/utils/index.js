@@ -3,6 +3,18 @@ import moment from 'moment'
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 
+const moveObject = (array, keyEl, offset) => {
+  const index = array.findIndex(el => el.key === keyEl)
+  const newIndex = index + offset
+  
+  if (newIndex > -1 && newIndex < array.length){
+    const removedEl = array.splice(index, 1)[0]
+    array.splice(newIndex, 0, removedEl)
+  }
+
+  return array
+}
+
 function setPanZoom(panZoomRef, ratio) {
   panZoomRef.current.autoCenter(ratio)
   panZoomRef.current.reset()
@@ -84,6 +96,7 @@ async function exportFile(fileName, objectToExport) {
 }
 
 export {
+  moveObject,
   sortObject,
   uploadFile,
   exportFile,

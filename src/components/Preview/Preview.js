@@ -70,7 +70,7 @@ const Preview = () => {
           item: { projects, languages, hobbies }
         }} />
       <PanZoom
-        minZoom="0.5"
+        minZoom="0.75"
         autoCenter
         ref={panZoom}
         autoCenterZoomLevel={0.75}
@@ -156,7 +156,7 @@ const Preview = () => {
             </div>
 
             <div className="flex justify-between -mx-8">
-              <div class="w-1/2 px-8">
+              <div class="w-1/2 px-8 leading-5">
                 <StyledTitle title="Languages" />
                 <div className="flex justify-between mb-4">
                   <div className="w-1/4">
@@ -171,7 +171,7 @@ const Preview = () => {
                   </div>
                 </div>
               </div>
-              <div class="w-1/2 px-8">
+              <div class="w-1/2 px-8 leading-5">
                 <StyledTitle title="Hobbies" />
                 <div className="flex justify-between mb-4">
                   <div className="w-1/4">
