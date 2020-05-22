@@ -64,7 +64,7 @@ const Forms = ({ item = {} }) => {
           name="phone"
           label="Phone Number"
           onChange={e => onChange(e, "social")}
-          onBlur={e => dispatch(updateSocial(social))}
+          onBlur={e => dispatch(updateSocial('phone', social.phone))}
         />
 
         <TextField
@@ -74,7 +74,7 @@ const Forms = ({ item = {} }) => {
           name="email"
           label="Email"
           onChange={e => onChange(e, "social")}
-          onBlur={e => dispatch(updateSocial(social))}
+          onBlur={e => dispatch(updateSocial('email', social.email))}
         />
       </Card>
 
@@ -85,7 +85,7 @@ const Forms = ({ item = {} }) => {
           name="github"
           label="GitHub"
           onChange={e => onChange(e, "social")}
-          onBlur={e => dispatch(updateSocial(social))}
+          onBlur={e => dispatch(updateSocial('github', social.github))}
         />
         <TextField
           placeholder="@quelhasugo"
@@ -93,7 +93,7 @@ const Forms = ({ item = {} }) => {
           name="linkedin"
           label="LinkedIn"
           onChange={e => onChange(e, "social")}
-          onBlur={e => dispatch(updateSocial(social))}
+          onBlur={e => dispatch(updateSocial('linkedin', social.linkedin))}
         />
       </Card>
     </div>

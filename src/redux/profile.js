@@ -8,15 +8,21 @@ const UPDATE_SOCIAL = 'UPDATE_SOCIAL'
 
 const initialData = {
   info: {},
-  social:{}
+  social: {
+    phone: '',
+    email: '',
+    github: '',
+    linkedin: ''
+  }
 }
 
-export default function profileReducer(state = initialData, action){
+export default function profileReducer(state = initialData, action) {
   switch (action.type) {
     case UPDATE_PROFILE:
-      return {...state, info: action.payload}
+      return { ...state, info: action.payload }
     case UPDATE_SOCIAL:
-      return {...state, social: action.payload}
+      state.social[action.payload.type] = action.payload.value
+      return state
     default:
       return state
   }
@@ -24,12 +30,12 @@ export default function profileReducer(state = initialData, action){
 
 // Action helper
 const action = (type, payload) => {
-  return {type, payload}
+  return { type, payload }
 }
 
 // Actions Creator
 export const updateProfile = profile => action(UPDATE_PROFILE, profile)
-export const updateSocial = social => action(UPDATE_SOCIAL, social)
+export const updateSocial = (type, value) => action(UPDATE_SOCIAL, { type, value })
 
 // export const updateProfile = (name, value) => 
 //   action(UPDATE_PROFILE, {

@@ -6,7 +6,8 @@ import { sortObject } from '../../utils/index';
 import MarkdownPreview from '../../shared/Markdown';
 import MenuActionsFile from './MenuActionsFile'
 import { View as ViewPDF } from '@react-pdf/renderer';
-
+import { socialFa } from '../../constants/social.js';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 const Preview = () => {
 
@@ -89,7 +90,12 @@ const Preview = () => {
             <div className="text-xs px-32">
               <ul className="flex flex-row justify-between flex-wrap">
                 {Object.entries(social).map(([key, value]) => {
-                  if(value !== "") return (<LiSocial key={key} className="flex-1 px-1">{value}</LiSocial>)
+                  if (value !== "") return (
+                    <LiSocial key={key} className="flex-1 px-1">
+                      <FontAwesomeIcon className="mr-1 text-gray-800" icon={socialFa[key]}/>
+                      {value}
+                    </LiSocial>
+                  )
                   else return ('')
                 })}
               </ul>
