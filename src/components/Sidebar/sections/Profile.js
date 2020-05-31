@@ -21,6 +21,13 @@ const Forms = ({ item = {} }) => {
   const [profile, setProfile] = useState(item.info)
   const [social, setSocial] = useState(item.social)
 
+  useEffect(() => {
+    if (item !== {}) {
+      setProfile(item.info)
+      setSocial(item.social)
+    }
+  })
+
   const onChange = (e, type) => {
     switch (type) {
       case "profile":
